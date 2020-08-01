@@ -1,5 +1,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as gcp from "@pulumi/gcp";
+import * as k8s from "@pulumi/kubernetes";
 
 const defaultInstance = new gcp.compute.Instance("default", {
     bootDisk: {
