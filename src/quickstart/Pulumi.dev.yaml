@@ -1,0 +1,2 @@
+config:
+  gcp:project: lp-vpn-network
