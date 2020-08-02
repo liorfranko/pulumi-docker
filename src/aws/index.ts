@@ -6,7 +6,7 @@ const crystal = new awsx.ecs.FargateService("crystal", {
     taskDefinitionArgs: {
         containers: {
             crystal: {
-                image: "docker.io/liorf1/crystal_docker:v1",
+                image: "docker.io/liorf1/crystal_docker:latest",
                 memory: 1024,
                 portMappings: [ lb ],
             }
