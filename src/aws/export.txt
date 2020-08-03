@@ -1,0 +1,1459 @@
+{
+    "version": 3,
+    "deployment": {
+        "manifest": {
+            "time": "2020-08-03T18:08:34.8163124Z",
+            "magic": "d5b4997ab21ce79f089e51328477cc701313ff5880339f37bed75d306c23c237",
+            "version": "v2.7.1"
+        },
+        "secrets_providers": {
+            "type": "service",
+            "state": {
+                "url": "https://api.pulumi.com",
+                "owner": "liorfranko",
+                "project": "aws",
+                "stack": "dev"
+            }
+        },
+        "resources": [
+            {
+                "urn": "urn:pulumi:dev::aws::pulumi:pulumi:Stack::aws-dev",
+                "custom": false,
+                "type": "pulumi:pulumi:Stack",
+                "outputs": {
+                    "url": "crystal-677f873-1666125974.eu-central-1.elb.amazonaws.com"
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1",
+                "custom": true,
+                "id": "2c1011eb-a995-4040-8c35-ce8241d5b0bd",
+                "type": "pulumi:providers:aws",
+                "inputs": {
+                    "region": "eu-central-1",
+                    "version": "2.13.1"
+                },
+                "outputs": {
+                    "region": "eu-central-1",
+                    "version": "2.13.1"
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ec2:SecurityGroup::crystal",
+                "custom": false,
+                "type": "awsx:x:ec2:SecurityGroup",
+                "parent": "urn:pulumi:dev::aws::pulumi:pulumi:Stack::aws-dev"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ecs:Cluster::default-cluster",
+                "custom": false,
+                "type": "awsx:x:ecs:Cluster",
+                "parent": "urn:pulumi:dev::aws::pulumi:pulumi:Stack::aws-dev"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer::crystal",
+                "custom": false,
+                "type": "aws:lb:ApplicationLoadBalancer",
+                "parent": "urn:pulumi:dev::aws::pulumi:pulumi:Stack::aws-dev",
+                "aliases": [
+                    "urn:pulumi:dev::aws::awsx:x:elasticloadbalancingv2:ApplicationLoadBalancer::crystal"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition::crystal",
+                "custom": false,
+                "type": "awsx:x:ecs:FargateTaskDefinition",
+                "parent": "urn:pulumi:dev::aws::pulumi:pulumi:Stack::aws-dev"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ecs:FargateService::crystal",
+                "custom": false,
+                "type": "awsx:x:ecs:FargateService",
+                "parent": "urn:pulumi:dev::aws::pulumi:pulumi:Stack::aws-dev"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::docker:image:Image::crystal-docker",
+                "custom": false,
+                "type": "docker:image:Image",
+                "parent": "urn:pulumi:dev::aws::pulumi:pulumi:Stack::aws-dev"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::crystal-task",
+                "custom": true,
+                "id": "crystal-task-f3f6495",
+                "type": "aws:iam/role:Role",
+                "inputs": {
+                    "__defaults": [
+                        "forceDetachPolicies",
+                        "maxSessionDuration",
+                        "name",
+                        "path"
+                    ],
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Principal\":{\"Service\":\"ecs-tasks.amazonaws.com\"},\"Effect\":\"Allow\",\"Sid\":\"\"}]}",
+                    "forceDetachPolicies": false,
+                    "maxSessionDuration": 3600,
+                    "name": "crystal-task-f3f6495",
+                    "path": "/"
+                },
+                "outputs": {
+                    "arn": "arn:aws:iam::553066777308:role/crystal-task-f3f6495",
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"ecs-tasks.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "createDate": "2020-08-03T16:25:11Z",
+                    "description": "",
+                    "forceDetachPolicies": false,
+                    "id": "crystal-task-f3f6495",
+                    "maxSessionDuration": 3600,
+                    "name": "crystal-task-f3f6495",
+                    "path": "/",
+                    "tags": {},
+                    "uniqueId": "AROAYBRKZJLOIDGKR2XCC"
+                },
+                "parent": "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition::crystal",
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd",
+                "propertyDependencies": {
+                    "assumeRolePolicy": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::crystal-execution",
+                "custom": true,
+                "id": "crystal-execution-1d3db85",
+                "type": "aws:iam/role:Role",
+                "inputs": {
+                    "__defaults": [
+                        "forceDetachPolicies",
+                        "maxSessionDuration",
+                        "name",
+                        "path"
+                    ],
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Principal\":{\"Service\":\"ecs-tasks.amazonaws.com\"},\"Effect\":\"Allow\",\"Sid\":\"\"}]}",
+                    "forceDetachPolicies": false,
+                    "maxSessionDuration": 3600,
+                    "name": "crystal-execution-1d3db85",
+                    "path": "/"
+                },
+                "outputs": {
+                    "arn": "arn:aws:iam::553066777308:role/crystal-execution-1d3db85",
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"ecs-tasks.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "createDate": "2020-08-03T16:25:11Z",
+                    "description": "",
+                    "forceDetachPolicies": false,
+                    "id": "crystal-execution-1d3db85",
+                    "maxSessionDuration": 3600,
+                    "name": "crystal-execution-1d3db85",
+                    "path": "/",
+                    "tags": {},
+                    "uniqueId": "AROAYBRKZJLOKLDLWGOQP"
+                },
+                "parent": "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition::crystal",
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd",
+                "propertyDependencies": {
+                    "assumeRolePolicy": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup::default-cluster",
+                "custom": false,
+                "type": "awsx:x:ec2:SecurityGroup",
+                "parent": "urn:pulumi:dev::aws::awsx:x:ecs:Cluster::default-cluster"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:cloudwatch/logGroup:LogGroup::crystal",
+                "custom": true,
+                "id": "crystal-7c8d155",
+                "type": "aws:cloudwatch/logGroup:LogGroup",
+                "inputs": {
+                    "__defaults": [
+                        "name"
+                    ],
+                    "name": "crystal-7c8d155",
+                    "retentionInDays": 1
+                },
+                "outputs": {
+                    "arn": "arn:aws:logs:eu-central-1:553066777308:log-group:crystal-7c8d155:*",
+                    "id": "crystal-7c8d155",
+                    "kmsKeyId": "",
+                    "name": "crystal-7c8d155",
+                    "retentionInDays": 1,
+                    "tags": {}
+                },
+                "parent": "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition::crystal",
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd",
+                "propertyDependencies": {
+                    "retentionInDays": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$aws:ecs/cluster:Cluster::default-cluster",
+                "custom": true,
+                "id": "arn:aws:ecs:eu-central-1:553066777308:cluster/default-cluster-62fe182",
+                "type": "aws:ecs/cluster:Cluster",
+                "inputs": {
+                    "__defaults": [
+                        "name"
+                    ],
+                    "name": "default-cluster-62fe182"
+                },
+                "outputs": {
+                    "arn": "arn:aws:ecs:eu-central-1:553066777308:cluster/default-cluster-62fe182",
+                    "capacityProviders": [],
+                    "defaultCapacityProviderStrategies": [],
+                    "id": "arn:aws:ecs:eu-central-1:553066777308:cluster/default-cluster-62fe182",
+                    "name": "default-cluster-62fe182",
+                    "settings": [
+                        {
+                            "name": "containerInsights",
+                            "value": "disabled"
+                        }
+                    ],
+                    "tags": {}
+                },
+                "parent": "urn:pulumi:dev::aws::awsx:x:ecs:Cluster::default-cluster",
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::aws:ecr/repository:Repository::lemonade",
+                "custom": true,
+                "id": "lemonade-bcc26e0",
+                "type": "aws:ecr/repository:Repository",
+                "inputs": {
+                    "__defaults": [
+                        "imageTagMutability",
+                        "name"
+                    ],
+                    "imageTagMutability": "MUTABLE",
+                    "name": "lemonade-bcc26e0"
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"delete\":1200000000000}}",
+                    "arn": "arn:aws:ecr:eu-central-1:553066777308:repository/lemonade-bcc26e0",
+                    "id": "lemonade-bcc26e0",
+                    "imageScanningConfiguration": {
+                        "scanOnPush": false
+                    },
+                    "imageTagMutability": "MUTABLE",
+                    "name": "lemonade-bcc26e0",
+                    "registryId": "553066777308",
+                    "repositoryUrl": "553066777308.dkr.ecr.eu-central-1.amazonaws.com/lemonade-bcc26e0",
+                    "tags": {}
+                },
+                "parent": "urn:pulumi:dev::aws::pulumi:pulumi:Stack::aws-dev",
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener::crystal",
+                "custom": false,
+                "type": "awsx:lb:ApplicationListener",
+                "parent": "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer::crystal",
+                "aliases": [
+                    "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:x:elasticloadbalancingv2:ApplicationListener::crystal",
+                    "urn:pulumi:dev::aws::awsx:lb:ApplicationListener::crystal",
+                    "urn:pulumi:dev::aws::awsx:x:elasticloadbalancingv2:ApplicationLoadBalancer$awsx:lb:ApplicationListener::crystal"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup::crystal",
+                "custom": false,
+                "type": "awsx:lb:ApplicationTargetGroup",
+                "parent": "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer::crystal",
+                "aliases": [
+                    "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:x:elasticloadbalancingv2:ApplicationTargetGroup::crystal",
+                    "urn:pulumi:dev::aws::awsx:lb:ApplicationTargetGroup::crystal",
+                    "urn:pulumi:dev::aws::awsx:x:elasticloadbalancingv2:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup::crystal"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:iam/rolePolicyAttachment:RolePolicyAttachment::crystal-task-fd1a00e5",
+                "custom": true,
+                "id": "crystal-task-f3f6495-20200803162516571700000003",
+                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
+                "inputs": {
+                    "__defaults": [],
+                    "policyArn": "arn:aws:iam::aws:policy/AmazonEC2ContainerServiceFullAccess",
+                    "role": "crystal-task-f3f6495"
+                },
+                "outputs": {
+                    "id": "crystal-task-f3f6495-20200803162516571700000003",
+                    "policyArn": "arn:aws:iam::aws:policy/AmazonEC2ContainerServiceFullAccess",
+                    "role": "crystal-task-f3f6495"
+                },
+                "parent": "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition::crystal",
+                "dependencies": [
+                    "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::crystal-task"
+                ],
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd",
+                "propertyDependencies": {
+                    "policyArn": null,
+                    "role": [
+                        "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::crystal-task"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ec2:Vpc::default-vpc",
+                "custom": false,
+                "type": "awsx:x:ec2:Vpc",
+                "parent": "urn:pulumi:dev::aws::pulumi:pulumi:Stack::aws-dev",
+                "aliases": [
+                    "urn:pulumi:dev::aws::awsx:x:ec2:Vpc::default-vpc",
+                    "urn:pulumi:dev::aws::awsx:x:ec2:Vpc::default-vpc-11bf4878"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:iam/rolePolicyAttachment:RolePolicyAttachment::crystal-task-32be53a2",
+                "custom": true,
+                "id": "crystal-task-f3f6495-20200803162516268400000002",
+                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
+                "inputs": {
+                    "__defaults": [],
+                    "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
+                    "role": "crystal-task-f3f6495"
+                },
+                "outputs": {
+                    "id": "crystal-task-f3f6495-20200803162516268400000002",
+                    "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
+                    "role": "crystal-task-f3f6495"
+                },
+                "parent": "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition::crystal",
+                "dependencies": [
+                    "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::crystal-task"
+                ],
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd",
+                "propertyDependencies": {
+                    "policyArn": null,
+                    "role": [
+                        "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::crystal-task"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$awsx:x:ec2:IngressSecurityGroupRule::default-cluster-ssh",
+                "custom": false,
+                "type": "awsx:x:ec2:IngressSecurityGroupRule",
+                "parent": "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup::default-cluster"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:iam/rolePolicyAttachment:RolePolicyAttachment::crystal-execution-9a42f520",
+                "custom": true,
+                "id": "crystal-execution-1d3db85-20200803162516069100000001",
+                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
+                "inputs": {
+                    "__defaults": [],
+                    "policyArn": "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
+                    "role": "crystal-execution-1d3db85"
+                },
+                "outputs": {
+                    "id": "crystal-execution-1d3db85-20200803162516069100000001",
+                    "policyArn": "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
+                    "role": "crystal-execution-1d3db85"
+                },
+                "parent": "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition::crystal",
+                "dependencies": [
+                    "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::crystal-execution"
+                ],
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd",
+                "propertyDependencies": {
+                    "policyArn": null,
+                    "role": [
+                        "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::crystal-execution"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$awsx:x:ec2:IngressSecurityGroupRule::default-cluster-containers",
+                "custom": false,
+                "type": "awsx:x:ec2:IngressSecurityGroupRule",
+                "parent": "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup::default-cluster"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:EgressSecurityGroupRule::crystal-external-0-egress",
+                "custom": false,
+                "type": "awsx:x:ec2:EgressSecurityGroupRule",
+                "parent": "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener::crystal",
+                "aliases": [
+                    "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:x:elasticloadbalancingv2:ApplicationListener$awsx:x:ec2:EgressSecurityGroupRule::crystal-external-0-egress",
+                    "urn:pulumi:dev::aws::awsx:lb:ApplicationListener$awsx:x:ec2:EgressSecurityGroupRule::crystal-external-0-egress",
+                    "urn:pulumi:dev::aws::awsx:x:elasticloadbalancingv2:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:EgressSecurityGroupRule::crystal-external-0-egress"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:IngressSecurityGroupRule::crystal-external-0-ingress",
+                "custom": false,
+                "type": "awsx:x:ec2:IngressSecurityGroupRule",
+                "parent": "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener::crystal",
+                "aliases": [
+                    "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:x:elasticloadbalancingv2:ApplicationListener$awsx:x:ec2:IngressSecurityGroupRule::crystal-external-0-ingress",
+                    "urn:pulumi:dev::aws::awsx:lb:ApplicationListener$awsx:x:ec2:IngressSecurityGroupRule::crystal-external-0-ingress",
+                    "urn:pulumi:dev::aws::awsx:x:elasticloadbalancingv2:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:IngressSecurityGroupRule::crystal-external-0-ingress"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::default-vpc-public-1",
+                "custom": false,
+                "type": "awsx:x:ec2:Subnet",
+                "parent": "urn:pulumi:dev::aws::awsx:x:ec2:Vpc::default-vpc",
+                "aliases": [
+                    "urn:pulumi:dev::aws::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::default-vpc-public-1",
+                    "urn:pulumi:dev::aws::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::default-vpc-11bf4878-public-1"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$awsx:x:ec2:EgressSecurityGroupRule::default-cluster-egress",
+                "custom": false,
+                "type": "awsx:x:ec2:EgressSecurityGroupRule",
+                "parent": "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup::default-cluster"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::default-vpc-public-0",
+                "custom": false,
+                "type": "awsx:x:ec2:Subnet",
+                "parent": "urn:pulumi:dev::aws::awsx:x:ec2:Vpc::default-vpc",
+                "aliases": [
+                    "urn:pulumi:dev::aws::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::default-vpc-public-0",
+                    "urn:pulumi:dev::aws::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::default-vpc-11bf4878-public-0"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-1",
+                "custom": true,
+                "id": "subnet-53c5ea19",
+                "type": "aws:ec2/subnet:Subnet",
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"1\"}",
+                    "arn": "arn:aws:ec2:eu-central-1:553066777308:subnet/subnet-53c5ea19",
+                    "assignIpv6AddressOnCreation": false,
+                    "availabilityZone": "eu-central-1c",
+                    "availabilityZoneId": "euc1-az1",
+                    "cidrBlock": "172.31.32.0/20",
+                    "id": "subnet-53c5ea19",
+                    "ipv6CidrBlock": "",
+                    "ipv6CidrBlockAssociationId": "",
+                    "mapPublicIpOnLaunch": true,
+                    "outpostArn": "",
+                    "ownerId": "553066777308",
+                    "tags": {},
+                    "vpcId": "vpc-11bf4878"
+                },
+                "parent": "urn:pulumi:dev::aws::awsx:x:ec2:Vpc::default-vpc",
+                "external": true,
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-0",
+                "custom": true,
+                "id": "subnet-4bdfc733",
+                "type": "aws:ec2/subnet:Subnet",
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"1\"}",
+                    "arn": "arn:aws:ec2:eu-central-1:553066777308:subnet/subnet-4bdfc733",
+                    "assignIpv6AddressOnCreation": false,
+                    "availabilityZone": "eu-central-1b",
+                    "availabilityZoneId": "euc1-az3",
+                    "cidrBlock": "172.31.0.0/20",
+                    "id": "subnet-4bdfc733",
+                    "ipv6CidrBlock": "",
+                    "ipv6CidrBlockAssociationId": "",
+                    "mapPublicIpOnLaunch": true,
+                    "outpostArn": "",
+                    "ownerId": "553066777308",
+                    "tags": {},
+                    "vpcId": "vpc-11bf4878"
+                },
+                "parent": "urn:pulumi:dev::aws::awsx:x:ec2:Vpc::default-vpc",
+                "external": true,
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::aws:ec2/vpc:Vpc::default-vpc",
+                "custom": true,
+                "id": "vpc-11bf4878",
+                "type": "aws:ec2/vpc:Vpc",
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"1\"}",
+                    "arn": "arn:aws:ec2:eu-central-1:553066777308:vpc/vpc-11bf4878",
+                    "assignGeneratedIpv6CidrBlock": false,
+                    "cidrBlock": "172.31.0.0/16",
+                    "defaultNetworkAclId": "acl-d44cbbbd",
+                    "defaultRouteTableId": "rtb-a1bd4bc8",
+                    "defaultSecurityGroupId": "sg-3959ab50",
+                    "dhcpOptionsId": "dopt-22ad4e4b",
+                    "enableDnsHostnames": true,
+                    "enableDnsSupport": true,
+                    "id": "vpc-11bf4878",
+                    "instanceTenancy": "default",
+                    "ipv6AssociationId": "",
+                    "ipv6CidrBlock": "",
+                    "mainRouteTableId": "rtb-a1bd4bc8",
+                    "ownerId": "553066777308",
+                    "tags": {}
+                },
+                "parent": "urn:pulumi:dev::aws::pulumi:pulumi:Stack::aws-dev",
+                "external": true,
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::crystal",
+                "custom": true,
+                "id": "arn:aws:elasticloadbalancing:eu-central-1:553066777308:targetgroup/crystal-8b6763f/9c0385c095913687",
+                "type": "aws:lb/targetGroup:TargetGroup",
+                "inputs": {
+                    "__defaults": [
+                        "lambdaMultiValueHeadersEnabled",
+                        "name",
+                        "proxyProtocolV2",
+                        "slowStart"
+                    ],
+                    "deregistrationDelay": 0,
+                    "healthCheck": {
+                        "__defaults": [
+                            "enabled",
+                            "healthyThreshold",
+                            "interval",
+                            "port",
+                            "protocol",
+                            "unhealthyThreshold"
+                        ],
+                        "enabled": true,
+                        "healthyThreshold": 3,
+                        "interval": 30,
+                        "path": "/health",
+                        "port": "traffic-port",
+                        "protocol": "HTTP",
+                        "unhealthyThreshold": 3
+                    },
+                    "lambdaMultiValueHeadersEnabled": false,
+                    "name": "crystal-8b6763f",
+                    "port": 80,
+                    "protocol": "HTTP",
+                    "proxyProtocolV2": false,
+                    "slowStart": 0,
+                    "tags": {
+                        "Name": "crystal",
+                        "__defaults": []
+                    },
+                    "targetType": "ip",
+                    "vpcId": "vpc-11bf4878"
+                },
+                "outputs": {
+                    "arn": "arn:aws:elasticloadbalancing:eu-central-1:553066777308:targetgroup/crystal-8b6763f/9c0385c095913687",
+                    "arnSuffix": "targetgroup/crystal-8b6763f/9c0385c095913687",
+                    "deregistrationDelay": 0,
+                    "healthCheck": {
+                        "enabled": true,
+                        "healthyThreshold": 3,
+                        "interval": 30,
+                        "matcher": "200",
+                        "path": "/health",
+                        "port": "traffic-port",
+                        "protocol": "HTTP",
+                        "timeout": 5,
+                        "unhealthyThreshold": 3
+                    },
+                    "id": "arn:aws:elasticloadbalancing:eu-central-1:553066777308:targetgroup/crystal-8b6763f/9c0385c095913687",
+                    "lambdaMultiValueHeadersEnabled": false,
+                    "loadBalancingAlgorithmType": "round_robin",
+                    "name": "crystal-8b6763f",
+                    "port": 80,
+                    "protocol": "HTTP",
+                    "proxyProtocolV2": false,
+                    "slowStart": 0,
+                    "stickiness": {
+                        "cookieDuration": 86400,
+                        "enabled": false,
+                        "type": "lb_cookie"
+                    },
+                    "tags": {
+                        "Name": "crystal"
+                    },
+                    "targetType": "ip",
+                    "vpcId": "vpc-11bf4878"
+                },
+                "parent": "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup::crystal",
+                "dependencies": [
+                    "urn:pulumi:dev::aws::aws:ec2/vpc:Vpc::default-vpc"
+                ],
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd",
+                "propertyDependencies": {
+                    "deregistrationDelay": null,
+                    "healthCheck": null,
+                    "port": null,
+                    "protocol": null,
+                    "tags": null,
+                    "targetType": null,
+                    "vpcId": [
+                        "urn:pulumi:dev::aws::aws:ec2/vpc:Vpc::default-vpc"
+                    ]
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::08808065",
+                    "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup$aws:elasticloadbalancingv2/targetGroup:TargetGroup::crystal",
+                    "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:x:elasticloadbalancingv2:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::crystal",
+                    "urn:pulumi:dev::aws::awsx:lb:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::crystal",
+                    "urn:pulumi:dev::aws::awsx:x:elasticloadbalancingv2:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::crystal"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::crystal",
+                "custom": true,
+                "id": "sg-0c9390e298a794f7f",
+                "type": "aws:ec2/securityGroup:SecurityGroup",
+                "inputs": {
+                    "__defaults": [
+                        "name",
+                        "revokeRulesOnDelete"
+                    ],
+                    "description": "Default security group for ALB: crystal",
+                    "name": "crystal-137ea78",
+                    "revokeRulesOnDelete": false,
+                    "vpcId": "vpc-11bf4878"
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":600000000000},\"schema_version\":\"1\"}",
+                    "arn": "arn:aws:ec2:eu-central-1:553066777308:security-group/sg-0c9390e298a794f7f",
+                    "description": "Default security group for ALB: crystal",
+                    "egress": [],
+                    "id": "sg-0c9390e298a794f7f",
+                    "ingress": [],
+                    "name": "crystal-137ea78",
+                    "ownerId": "553066777308",
+                    "revokeRulesOnDelete": false,
+                    "tags": {},
+                    "vpcId": "vpc-11bf4878"
+                },
+                "parent": "urn:pulumi:dev::aws::awsx:x:ec2:SecurityGroup::crystal",
+                "dependencies": [
+                    "urn:pulumi:dev::aws::aws:ec2/vpc:Vpc::default-vpc"
+                ],
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd",
+                "propertyDependencies": {
+                    "description": null,
+                    "vpcId": [
+                        "urn:pulumi:dev::aws::aws:ec2/vpc:Vpc::default-vpc"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::default-cluster",
+                "custom": true,
+                "id": "sg-00f02b940ef8fb420",
+                "type": "aws:ec2/securityGroup:SecurityGroup",
+                "inputs": {
+                    "__defaults": [
+                        "name",
+                        "revokeRulesOnDelete"
+                    ],
+                    "description": "Managed by Pulumi",
+                    "name": "default-cluster-c62417a",
+                    "revokeRulesOnDelete": false,
+                    "tags": {
+                        "Name": "default-cluster",
+                        "__defaults": []
+                    },
+                    "vpcId": "vpc-11bf4878"
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":600000000000},\"schema_version\":\"1\"}",
+                    "arn": "arn:aws:ec2:eu-central-1:553066777308:security-group/sg-00f02b940ef8fb420",
+                    "description": "Managed by Pulumi",
+                    "egress": [],
+                    "id": "sg-00f02b940ef8fb420",
+                    "ingress": [],
+                    "name": "default-cluster-c62417a",
+                    "ownerId": "553066777308",
+                    "revokeRulesOnDelete": false,
+                    "tags": {
+                        "Name": "default-cluster"
+                    },
+                    "vpcId": "vpc-11bf4878"
+                },
+                "parent": "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup::default-cluster",
+                "dependencies": [
+                    "urn:pulumi:dev::aws::aws:ec2/vpc:Vpc::default-vpc"
+                ],
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd",
+                "propertyDependencies": {
+                    "description": null,
+                    "tags": null,
+                    "vpcId": [
+                        "urn:pulumi:dev::aws::aws:ec2/vpc:Vpc::default-vpc"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$aws:lb/loadBalancer:LoadBalancer::crystal",
+                "custom": true,
+                "id": "arn:aws:elasticloadbalancing:eu-central-1:553066777308:loadbalancer/app/crystal-677f873/9e995c1ac4dc170d",
+                "type": "aws:lb/loadBalancer:LoadBalancer",
+                "inputs": {
+                    "__defaults": [
+                        "dropInvalidHeaderFields",
+                        "enableCrossZoneLoadBalancing",
+                        "enableDeletionProtection",
+                        "enableHttp2",
+                        "idleTimeout",
+                        "name"
+                    ],
+                    "dropInvalidHeaderFields": false,
+                    "enableCrossZoneLoadBalancing": false,
+                    "enableDeletionProtection": false,
+                    "enableHttp2": true,
+                    "idleTimeout": 60,
+                    "internal": false,
+                    "loadBalancerType": "application",
+                    "name": "crystal-677f873",
+                    "securityGroups": [
+                        "sg-0c9390e298a794f7f"
+                    ],
+                    "subnets": [
+                        "subnet-4bdfc733",
+                        "subnet-53c5ea19"
+                    ],
+                    "tags": {
+                        "Name": "crystal",
+                        "__defaults": []
+                    }
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":600000000000,\"update\":600000000000}}",
+                    "accessLogs": {
+                        "bucket": "",
+                        "enabled": false,
+                        "prefix": ""
+                    },
+                    "arn": "arn:aws:elasticloadbalancing:eu-central-1:553066777308:loadbalancer/app/crystal-677f873/9e995c1ac4dc170d",
+                    "arnSuffix": "app/crystal-677f873/9e995c1ac4dc170d",
+                    "dnsName": "crystal-677f873-1666125974.eu-central-1.elb.amazonaws.com",
+                    "dropInvalidHeaderFields": false,
+                    "enableDeletionProtection": false,
+                    "enableHttp2": true,
+                    "id": "arn:aws:elasticloadbalancing:eu-central-1:553066777308:loadbalancer/app/crystal-677f873/9e995c1ac4dc170d",
+                    "idleTimeout": 60,
+                    "internal": false,
+                    "ipAddressType": "ipv4",
+                    "loadBalancerType": "application",
+                    "name": "crystal-677f873",
+                    "securityGroups": [
+                        "sg-0c9390e298a794f7f"
+                    ],
+                    "subnetMappings": [
+                        {
+                            "allocationId": "",
+                            "subnetId": "subnet-4bdfc733"
+                        },
+                        {
+                            "allocationId": "",
+                            "subnetId": "subnet-53c5ea19"
+                        }
+                    ],
+                    "subnets": [
+                        "subnet-4bdfc733",
+                        "subnet-53c5ea19"
+                    ],
+                    "tags": {
+                        "Name": "crystal"
+                    },
+                    "vpcId": "vpc-11bf4878",
+                    "zoneId": "Z215JYRZR1TBD5"
+                },
+                "parent": "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer::crystal",
+                "dependencies": [
+                    "urn:pulumi:dev::aws::awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::crystal",
+                    "urn:pulumi:dev::aws::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-0",
+                    "urn:pulumi:dev::aws::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-1"
+                ],
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd",
+                "propertyDependencies": {
+                    "internal": null,
+                    "loadBalancerType": null,
+                    "securityGroups": [
+                        "urn:pulumi:dev::aws::awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::crystal"
+                    ],
+                    "subnets": [
+                        "urn:pulumi:dev::aws::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-0",
+                        "urn:pulumi:dev::aws::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-1"
+                    ],
+                    "tags": null
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$aws:lb/loadBalancer:LoadBalancer::08808065",
+                    "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$aws:elasticloadbalancingv2/loadBalancer:LoadBalancer::crystal",
+                    "urn:pulumi:dev::aws::awsx:x:elasticloadbalancingv2:ApplicationLoadBalancer$aws:lb/loadBalancer:LoadBalancer::crystal"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:EgressSecurityGroupRule$aws:ec2/securityGroupRule:SecurityGroupRule::crystal-external-0-egress",
+                "custom": true,
+                "id": "sgrule-3802673743",
+                "type": "aws:ec2/securityGroupRule:SecurityGroupRule",
+                "inputs": {
+                    "__defaults": [
+                        "self"
+                    ],
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "Externally available at port 80",
+                    "fromPort": 80,
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-0c9390e298a794f7f",
+                    "self": false,
+                    "toPort": 80,
+                    "type": "egress"
+                },
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"2\"}",
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "Externally available at port 80",
+                    "fromPort": 80,
+                    "id": "sgrule-3802673743",
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-0c9390e298a794f7f",
+                    "self": false,
+                    "toPort": 80,
+                    "type": "egress"
+                },
+                "parent": "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:EgressSecurityGroupRule::crystal-external-0-egress",
+                "dependencies": [
+                    "urn:pulumi:dev::aws::awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::crystal"
+                ],
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd",
+                "propertyDependencies": {
+                    "cidrBlocks": null,
+                    "description": null,
+                    "fromPort": null,
+                    "protocol": null,
+                    "securityGroupId": [
+                        "urn:pulumi:dev::aws::awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::crystal"
+                    ],
+                    "toPort": null,
+                    "type": null
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:x:elasticloadbalancingv2:ApplicationListener$awsx:x:ec2:EgressSecurityGroupRule$aws:ec2/securityGroupRule:SecurityGroupRule::crystal-external-0-egress",
+                    "urn:pulumi:dev::aws::awsx:lb:ApplicationListener$awsx:x:ec2:EgressSecurityGroupRule$aws:ec2/securityGroupRule:SecurityGroupRule::crystal-external-0-egress",
+                    "urn:pulumi:dev::aws::awsx:x:elasticloadbalancingv2:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:EgressSecurityGroupRule$aws:ec2/securityGroupRule:SecurityGroupRule::crystal-external-0-egress"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:IngressSecurityGroupRule$aws:ec2/securityGroupRule:SecurityGroupRule::crystal-external-0-ingress",
+                "custom": true,
+                "id": "sgrule-1686361959",
+                "type": "aws:ec2/securityGroupRule:SecurityGroupRule",
+                "inputs": {
+                    "__defaults": [
+                        "self"
+                    ],
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "Externally available at port 80",
+                    "fromPort": 80,
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-0c9390e298a794f7f",
+                    "self": false,
+                    "toPort": 80,
+                    "type": "ingress"
+                },
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"2\"}",
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "Externally available at port 80",
+                    "fromPort": 80,
+                    "id": "sgrule-1686361959",
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-0c9390e298a794f7f",
+                    "self": false,
+                    "toPort": 80,
+                    "type": "ingress"
+                },
+                "parent": "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:IngressSecurityGroupRule::crystal-external-0-ingress",
+                "dependencies": [
+                    "urn:pulumi:dev::aws::awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::crystal"
+                ],
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd",
+                "propertyDependencies": {
+                    "cidrBlocks": null,
+                    "description": null,
+                    "fromPort": null,
+                    "protocol": null,
+                    "securityGroupId": [
+                        "urn:pulumi:dev::aws::awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::crystal"
+                    ],
+                    "toPort": null,
+                    "type": null
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:x:elasticloadbalancingv2:ApplicationListener$awsx:x:ec2:IngressSecurityGroupRule$aws:ec2/securityGroupRule:SecurityGroupRule::crystal-external-0-ingress",
+                    "urn:pulumi:dev::aws::awsx:lb:ApplicationListener$awsx:x:ec2:IngressSecurityGroupRule$aws:ec2/securityGroupRule:SecurityGroupRule::crystal-external-0-ingress",
+                    "urn:pulumi:dev::aws::awsx:x:elasticloadbalancingv2:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:IngressSecurityGroupRule$aws:ec2/securityGroupRule:SecurityGroupRule::crystal-external-0-ingress"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$awsx:x:ec2:IngressSecurityGroupRule$aws:ec2/securityGroupRule:SecurityGroupRule::default-cluster-ssh",
+                "custom": true,
+                "id": "sgrule-1366081038",
+                "type": "aws:ec2/securityGroupRule:SecurityGroupRule",
+                "inputs": {
+                    "__defaults": [
+                        "self"
+                    ],
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "allow ssh in from any ipv4 address",
+                    "fromPort": 22,
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-00f02b940ef8fb420",
+                    "self": false,
+                    "toPort": 22,
+                    "type": "ingress"
+                },
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"2\"}",
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "allow ssh in from any ipv4 address",
+                    "fromPort": 22,
+                    "id": "sgrule-1366081038",
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-00f02b940ef8fb420",
+                    "self": false,
+                    "toPort": 22,
+                    "type": "ingress"
+                },
+                "parent": "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$awsx:x:ec2:IngressSecurityGroupRule::default-cluster-ssh",
+                "dependencies": [
+                    "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::default-cluster"
+                ],
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd",
+                "propertyDependencies": {
+                    "cidrBlocks": null,
+                    "description": null,
+                    "fromPort": null,
+                    "protocol": null,
+                    "securityGroupId": [
+                        "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::default-cluster"
+                    ],
+                    "toPort": null,
+                    "type": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$awsx:x:ec2:EgressSecurityGroupRule$aws:ec2/securityGroupRule:SecurityGroupRule::default-cluster-egress",
+                "custom": true,
+                "id": "sgrule-2716918905",
+                "type": "aws:ec2/securityGroupRule:SecurityGroupRule",
+                "inputs": {
+                    "__defaults": [
+                        "self"
+                    ],
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "allow output to any ipv4 address using any protocol",
+                    "fromPort": 0,
+                    "protocol": "-1",
+                    "securityGroupId": "sg-00f02b940ef8fb420",
+                    "self": false,
+                    "toPort": 0,
+                    "type": "egress"
+                },
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"2\"}",
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "allow output to any ipv4 address using any protocol",
+                    "fromPort": 0,
+                    "id": "sgrule-2716918905",
+                    "protocol": "-1",
+                    "securityGroupId": "sg-00f02b940ef8fb420",
+                    "self": false,
+                    "toPort": 0,
+                    "type": "egress"
+                },
+                "parent": "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$awsx:x:ec2:EgressSecurityGroupRule::default-cluster-egress",
+                "dependencies": [
+                    "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::default-cluster"
+                ],
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd",
+                "propertyDependencies": {
+                    "cidrBlocks": null,
+                    "description": null,
+                    "fromPort": null,
+                    "protocol": null,
+                    "securityGroupId": [
+                        "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::default-cluster"
+                    ],
+                    "toPort": null,
+                    "type": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$awsx:x:ec2:IngressSecurityGroupRule$aws:ec2/securityGroupRule:SecurityGroupRule::default-cluster-containers",
+                "custom": true,
+                "id": "sgrule-4001815873",
+                "type": "aws:ec2/securityGroupRule:SecurityGroupRule",
+                "inputs": {
+                    "__defaults": [
+                        "self"
+                    ],
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "allow incoming tcp on any port from any ipv4 address",
+                    "fromPort": 0,
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-00f02b940ef8fb420",
+                    "self": false,
+                    "toPort": 65535,
+                    "type": "ingress"
+                },
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"2\"}",
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "allow incoming tcp on any port from any ipv4 address",
+                    "fromPort": 0,
+                    "id": "sgrule-4001815873",
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-00f02b940ef8fb420",
+                    "self": false,
+                    "toPort": 65535,
+                    "type": "ingress"
+                },
+                "parent": "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$awsx:x:ec2:IngressSecurityGroupRule::default-cluster-containers",
+                "dependencies": [
+                    "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::default-cluster"
+                ],
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd",
+                "propertyDependencies": {
+                    "cidrBlocks": null,
+                    "description": null,
+                    "fromPort": null,
+                    "protocol": null,
+                    "securityGroupId": [
+                        "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::default-cluster"
+                    ],
+                    "toPort": null,
+                    "type": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$aws:lb/listener:Listener::crystal",
+                "custom": true,
+                "id": "arn:aws:elasticloadbalancing:eu-central-1:553066777308:listener/app/crystal-677f873/9e995c1ac4dc170d/7816bdd0087a1e84",
+                "type": "aws:lb/listener:Listener",
+                "inputs": {
+                    "__defaults": [],
+                    "defaultActions": [
+                        {
+                            "__defaults": [],
+                            "targetGroupArn": "arn:aws:elasticloadbalancing:eu-central-1:553066777308:targetgroup/crystal-8b6763f/9c0385c095913687",
+                            "type": "forward"
+                        }
+                    ],
+                    "loadBalancerArn": "arn:aws:elasticloadbalancing:eu-central-1:553066777308:loadbalancer/app/crystal-677f873/9e995c1ac4dc170d",
+                    "port": 80,
+                    "protocol": "HTTP"
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"read\":600000000000}}",
+                    "arn": "arn:aws:elasticloadbalancing:eu-central-1:553066777308:listener/app/crystal-677f873/9e995c1ac4dc170d/7816bdd0087a1e84",
+                    "defaultActions": [
+                        {
+                            "authenticateCognito": null,
+                            "authenticateOidc": null,
+                            "fixedResponse": null,
+                            "forward": null,
+                            "order": 1,
+                            "redirect": null,
+                            "targetGroupArn": "arn:aws:elasticloadbalancing:eu-central-1:553066777308:targetgroup/crystal-8b6763f/9c0385c095913687",
+                            "type": "forward"
+                        }
+                    ],
+                    "id": "arn:aws:elasticloadbalancing:eu-central-1:553066777308:listener/app/crystal-677f873/9e995c1ac4dc170d/7816bdd0087a1e84",
+                    "loadBalancerArn": "arn:aws:elasticloadbalancing:eu-central-1:553066777308:loadbalancer/app/crystal-677f873/9e995c1ac4dc170d",
+                    "port": 80,
+                    "protocol": "HTTP",
+                    "sslPolicy": ""
+                },
+                "parent": "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener::crystal",
+                "dependencies": [
+                    "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$aws:lb/loadBalancer:LoadBalancer::crystal",
+                    "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::crystal"
+                ],
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd",
+                "propertyDependencies": {
+                    "defaultActions": [
+                        "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::crystal"
+                    ],
+                    "loadBalancerArn": [
+                        "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$aws:lb/loadBalancer:LoadBalancer::crystal"
+                    ],
+                    "port": null,
+                    "protocol": null
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$aws:elasticloadbalancingv2/listener:Listener::crystal",
+                    "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:x:elasticloadbalancingv2:ApplicationListener$aws:lb/listener:Listener::crystal",
+                    "urn:pulumi:dev::aws::awsx:lb:ApplicationListener$aws:lb/listener:Listener::crystal",
+                    "urn:pulumi:dev::aws::awsx:x:elasticloadbalancingv2:ApplicationLoadBalancer$awsx:lb:ApplicationListener$aws:lb/listener:Listener::crystal"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:ecs/taskDefinition:TaskDefinition::crystal",
+                "custom": true,
+                "id": "crystal-aece9bcd",
+                "type": "aws:ecs/taskDefinition:TaskDefinition",
+                "inputs": {
+                    "__defaults": [],
+                    "containerDefinitions": "[{\"image\":\"553066777308.dkr.ecr.eu-central-1.amazonaws.com/lemonade-bcc26e0\",\"memory\":1024,\"portMappings\":[{\"containerPort\":80,\"hostPort\":80}],\"cpu\":4096,\"name\":\"crystal\",\"logConfiguration\":{\"logDriver\":\"awslogs\",\"options\":{\"awslogs-group\":\"crystal-7c8d155\",\"awslogs-region\":\"eu-central-1\",\"awslogs-stream-prefix\":\"crystal\"}}}]",
+                    "cpu": "4096",
+                    "executionRoleArn": "arn:aws:iam::553066777308:role/crystal-execution-1d3db85",
+                    "family": "crystal-aece9bcd",
+                    "memory": "8192",
+                    "networkMode": "awsvpc",
+                    "requiresCompatibilities": [
+                        "FARGATE"
+                    ],
+                    "taskRoleArn": "arn:aws:iam::553066777308:role/crystal-task-f3f6495"
+                },
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"1\"}",
+                    "arn": "arn:aws:ecs:eu-central-1:553066777308:task-definition/crystal-aece9bcd:15",
+                    "containerDefinitions": "[{\"cpu\":4096,\"environment\":[],\"essential\":true,\"image\":\"553066777308.dkr.ecr.eu-central-1.amazonaws.com/lemonade-bcc26e0\",\"logConfiguration\":{\"logDriver\":\"awslogs\",\"options\":{\"awslogs-group\":\"crystal-7c8d155\",\"awslogs-region\":\"eu-central-1\",\"awslogs-stream-prefix\":\"crystal\"}},\"memory\":1024,\"mountPoints\":[],\"name\":\"crystal\",\"portMappings\":[{\"containerPort\":80,\"hostPort\":80,\"protocol\":\"tcp\"}],\"volumesFrom\":[]}]",
+                    "cpu": "4096",
+                    "executionRoleArn": "arn:aws:iam::553066777308:role/crystal-execution-1d3db85",
+                    "family": "crystal-aece9bcd",
+                    "id": "crystal-aece9bcd",
+                    "inferenceAccelerators": [],
+                    "ipcMode": "",
+                    "memory": "8192",
+                    "networkMode": "awsvpc",
+                    "pidMode": "",
+                    "placementConstraints": [],
+                    "proxyConfiguration": null,
+                    "requiresCompatibilities": [
+                        "FARGATE"
+                    ],
+                    "revision": 15,
+                    "tags": {},
+                    "taskRoleArn": "arn:aws:iam::553066777308:role/crystal-task-f3f6495",
+                    "volumes": []
+                },
+                "parent": "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition::crystal",
+                "dependencies": [
+                    "urn:pulumi:dev::aws::aws:ecr/repository:Repository::lemonade",
+                    "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:cloudwatch/logGroup:LogGroup::crystal",
+                    "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::crystal",
+                    "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$aws:lb/listener:Listener::crystal",
+                    "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::crystal-execution",
+                    "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::crystal-task"
+                ],
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd",
+                "propertyDependencies": {
+                    "containerDefinitions": [
+                        "urn:pulumi:dev::aws::aws:ecr/repository:Repository::lemonade",
+                        "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:cloudwatch/logGroup:LogGroup::crystal",
+                        "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::crystal",
+                        "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$aws:lb/listener:Listener::crystal"
+                    ],
+                    "cpu": [
+                        "urn:pulumi:dev::aws::aws:ecr/repository:Repository::lemonade"
+                    ],
+                    "executionRoleArn": [
+                        "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::crystal-execution"
+                    ],
+                    "family": [
+                        "urn:pulumi:dev::aws::aws:ecr/repository:Repository::lemonade",
+                        "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:cloudwatch/logGroup:LogGroup::crystal",
+                        "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::crystal",
+                        "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$aws:lb/listener:Listener::crystal"
+                    ],
+                    "memory": [
+                        "urn:pulumi:dev::aws::aws:ecr/repository:Repository::lemonade"
+                    ],
+                    "networkMode": null,
+                    "requiresCompatibilities": null,
+                    "taskRoleArn": [
+                        "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::crystal-task"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:ecr:Repository::lemonade",
+                "custom": false,
+                "type": "awsx:ecr:Repository",
+                "parent": "urn:pulumi:dev::aws::pulumi:pulumi:Stack::aws-dev"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:ecr:Repository$aws:ecr/repository:Repository::lemonade",
+                "custom": true,
+                "id": "lemonade-718c3eb",
+                "type": "aws:ecr/repository:Repository",
+                "inputs": {
+                    "__defaults": [
+                        "imageTagMutability",
+                        "name"
+                    ],
+                    "imageTagMutability": "MUTABLE",
+                    "name": "lemonade-718c3eb"
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"delete\":1200000000000}}",
+                    "arn": "arn:aws:ecr:eu-central-1:553066777308:repository/lemonade-718c3eb",
+                    "id": "lemonade-718c3eb",
+                    "imageScanningConfiguration": {
+                        "scanOnPush": false
+                    },
+                    "imageTagMutability": "MUTABLE",
+                    "name": "lemonade-718c3eb",
+                    "registryId": "553066777308",
+                    "repositoryUrl": "553066777308.dkr.ecr.eu-central-1.amazonaws.com/lemonade-718c3eb",
+                    "tags": {}
+                },
+                "parent": "urn:pulumi:dev::aws::awsx:ecr:Repository::lemonade",
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd"
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:ecr:Repository$aws:ecr/lifecyclePolicy:LifecyclePolicy::lemonade",
+                "custom": true,
+                "id": "lemonade-718c3eb",
+                "type": "aws:ecr/lifecyclePolicy:LifecyclePolicy",
+                "inputs": {
+                    "__defaults": [],
+                    "policy": "{\"rules\":[{\"rulePriority\":1,\"description\":\"remove untagged images\",\"selection\":{\"tagStatus\":\"untagged\",\"countType\":\"imageCountMoreThan\",\"countNumber\":1},\"action\":{\"type\":\"expire\"}}]}",
+                    "repository": "lemonade-718c3eb"
+                },
+                "outputs": {
+                    "id": "lemonade-718c3eb",
+                    "policy": "{\"rules\":[{\"rulePriority\":1,\"description\":\"remove untagged images\",\"selection\":{\"tagStatus\":\"untagged\",\"countType\":\"imageCountMoreThan\",\"countNumber\":1},\"action\":{\"type\":\"expire\"}}]}",
+                    "registryId": "553066777308",
+                    "repository": "lemonade-718c3eb"
+                },
+                "parent": "urn:pulumi:dev::aws::awsx:ecr:Repository::lemonade",
+                "dependencies": [
+                    "urn:pulumi:dev::aws::awsx:ecr:Repository$aws:ecr/repository:Repository::lemonade"
+                ],
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd",
+                "propertyDependencies": {
+                    "policy": null,
+                    "repository": [
+                        "urn:pulumi:dev::aws::awsx:ecr:Repository$aws:ecr/repository:Repository::lemonade"
+                    ]
+                },
+                "aliases": [
+                    "urn:pulumi:dev::aws::awsx:ecr:Repository$aws:ecr/lifecyclePolicy:LifecyclePolicy::lemonade"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:ecs/taskDefinition:TaskDefinition::crystal",
+                "custom": true,
+                "delete": true,
+                "id": "crystal-aece9bcd",
+                "type": "aws:ecs/taskDefinition:TaskDefinition",
+                "inputs": {
+                    "__defaults": [],
+                    "containerDefinitions": "[{\"image\":\"553066777308.dkr.ecr.eu-central-1.amazonaws.com/lemonade-718c3eb:3d5a896988f81a47ee8b5d7c159cf0ceb86183a77ab4e0954a739456a72785b1\",\"memory\":1024,\"portMappings\":[{\"containerPort\":80,\"hostPort\":80}],\"cpu\":4096,\"name\":\"crystal\",\"logConfiguration\":{\"logDriver\":\"awslogs\",\"options\":{\"awslogs-group\":\"crystal-7c8d155\",\"awslogs-region\":\"eu-central-1\",\"awslogs-stream-prefix\":\"crystal\"}}}]",
+                    "cpu": "4096",
+                    "executionRoleArn": "arn:aws:iam::553066777308:role/crystal-execution-1d3db85",
+                    "family": "crystal-aece9bcd",
+                    "memory": "8192",
+                    "networkMode": "awsvpc",
+                    "requiresCompatibilities": [
+                        "FARGATE"
+                    ],
+                    "taskRoleArn": "arn:aws:iam::553066777308:role/crystal-task-f3f6495"
+                },
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"1\"}",
+                    "arn": "arn:aws:ecs:eu-central-1:553066777308:task-definition/crystal-aece9bcd:14",
+                    "containerDefinitions": "[{\"cpu\":4096,\"environment\":[],\"essential\":true,\"image\":\"553066777308.dkr.ecr.eu-central-1.amazonaws.com/lemonade-718c3eb:3d5a896988f81a47ee8b5d7c159cf0ceb86183a77ab4e0954a739456a72785b1\",\"logConfiguration\":{\"logDriver\":\"awslogs\",\"options\":{\"awslogs-group\":\"crystal-7c8d155\",\"awslogs-region\":\"eu-central-1\",\"awslogs-stream-prefix\":\"crystal\"}},\"memory\":1024,\"mountPoints\":[],\"name\":\"crystal\",\"portMappings\":[{\"containerPort\":80,\"hostPort\":80,\"protocol\":\"tcp\"}],\"volumesFrom\":[]}]",
+                    "cpu": "4096",
+                    "executionRoleArn": "arn:aws:iam::553066777308:role/crystal-execution-1d3db85",
+                    "family": "crystal-aece9bcd",
+                    "id": "crystal-aece9bcd",
+                    "inferenceAccelerators": [],
+                    "ipcMode": "",
+                    "memory": "8192",
+                    "networkMode": "awsvpc",
+                    "pidMode": "",
+                    "placementConstraints": [],
+                    "proxyConfiguration": null,
+                    "requiresCompatibilities": [
+                        "FARGATE"
+                    ],
+                    "revision": 14,
+                    "tags": {},
+                    "taskRoleArn": "arn:aws:iam::553066777308:role/crystal-task-f3f6495",
+                    "volumes": []
+                },
+                "parent": "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition::crystal",
+                "dependencies": [
+                    "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$aws:lb/listener:Listener::crystal",
+                    "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::crystal",
+                    "urn:pulumi:dev::aws::awsx:ecr:Repository$aws:ecr/repository:Repository::lemonade",
+                    "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:cloudwatch/logGroup:LogGroup::crystal",
+                    "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::crystal-execution",
+                    "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::crystal-task"
+                ],
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd",
+                "propertyDependencies": {
+                    "containerDefinitions": [
+                        "urn:pulumi:dev::aws::awsx:ecr:Repository$aws:ecr/repository:Repository::lemonade",
+                        "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:cloudwatch/logGroup:LogGroup::crystal",
+                        "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::crystal",
+                        "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$aws:lb/listener:Listener::crystal"
+                    ],
+                    "cpu": [
+                        "urn:pulumi:dev::aws::awsx:ecr:Repository$aws:ecr/repository:Repository::lemonade"
+                    ],
+                    "executionRoleArn": [
+                        "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::crystal-execution"
+                    ],
+                    "family": [
+                        "urn:pulumi:dev::aws::awsx:ecr:Repository$aws:ecr/repository:Repository::lemonade",
+                        "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:cloudwatch/logGroup:LogGroup::crystal",
+                        "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::crystal",
+                        "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$aws:lb/listener:Listener::crystal"
+                    ],
+                    "memory": [
+                        "urn:pulumi:dev::aws::awsx:ecr:Repository$aws:ecr/repository:Repository::lemonade"
+                    ],
+                    "networkMode": null,
+                    "requiresCompatibilities": null,
+                    "taskRoleArn": [
+                        "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::crystal-task"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:dev::aws::awsx:x:ecs:FargateService$aws:ecs/service:Service::crystal",
+                "custom": true,
+                "id": "arn:aws:ecs:eu-central-1:553066777308:service/crystal-a7cb289",
+                "type": "aws:ecs/service:Service",
+                "inputs": {
+                    "__defaults": [
+                        "deploymentMaximumPercent",
+                        "deploymentMinimumHealthyPercent",
+                        "enableEcsManagedTags",
+                        "name",
+                        "schedulingStrategy"
+                    ],
+                    "cluster": "arn:aws:ecs:eu-central-1:553066777308:cluster/default-cluster-62fe182",
+                    "deploymentMaximumPercent": 200,
+                    "deploymentMinimumHealthyPercent": 100,
+                    "desiredCount": 2,
+                    "enableEcsManagedTags": false,
+                    "launchType": "FARGATE",
+                    "loadBalancers": [
+                        {
+                            "__defaults": [],
+                            "containerName": "crystal",
+                            "containerPort": 80,
+                            "targetGroupArn": "arn:aws:elasticloadbalancing:eu-central-1:553066777308:targetgroup/crystal-8b6763f/9c0385c095913687"
+                        }
+                    ],
+                    "name": "crystal-a7cb289",
+                    "networkConfiguration": {
+                        "__defaults": [],
+                        "assignPublicIp": true,
+                        "securityGroups": [
+                            "sg-00f02b940ef8fb420"
+                        ],
+                        "subnets": [
+                            "subnet-4bdfc733",
+                            "subnet-53c5ea19"
+                        ]
+                    },
+                    "schedulingStrategy": "REPLICA",
+                    "taskDefinition": "arn:aws:ecs:eu-central-1:553066777308:task-definition/crystal-aece9bcd:14",
+                    "waitForSteadyState": true
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"delete\":1200000000000}}",
+                    "capacityProviderStrategies": [],
+                    "cluster": "arn:aws:ecs:eu-central-1:553066777308:cluster/default-cluster-62fe182",
+                    "deploymentController": {
+                        "type": "ECS"
+                    },
+                    "deploymentMaximumPercent": 200,
+                    "deploymentMinimumHealthyPercent": 100,
+                    "desiredCount": 2,
+                    "enableEcsManagedTags": false,
+                    "healthCheckGracePeriodSeconds": 0,
+                    "iamRole": "aws-service-role",
+                    "id": "arn:aws:ecs:eu-central-1:553066777308:service/crystal-a7cb289",
+                    "launchType": "FARGATE",
+                    "loadBalancers": [
+                        {
+                            "containerName": "crystal",
+                            "containerPort": 80,
+                            "elbName": "",
+                            "targetGroupArn": "arn:aws:elasticloadbalancing:eu-central-1:553066777308:targetgroup/crystal-8b6763f/9c0385c095913687"
+                        }
+                    ],
+                    "name": "crystal-a7cb289",
+                    "networkConfiguration": {
+                        "assignPublicIp": true,
+                        "securityGroups": [
+                            "sg-00f02b940ef8fb420"
+                        ],
+                        "subnets": [
+                            "subnet-4bdfc733",
+                            "subnet-53c5ea19"
+                        ]
+                    },
+                    "orderedPlacementStrategies": [],
+                    "placementConstraints": [],
+                    "placementStrategies": [],
+                    "platformVersion": "LATEST",
+                    "propagateTags": "NONE",
+                    "schedulingStrategy": "REPLICA",
+                    "serviceRegistries": null,
+                    "tags": {},
+                    "taskDefinition": "arn:aws:ecs:eu-central-1:553066777308:task-definition/crystal-aece9bcd:14",
+                    "waitForSteadyState": true
+                },
+                "parent": "urn:pulumi:dev::aws::awsx:x:ecs:FargateService::crystal",
+                "dependencies": [
+                    "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$aws:lb/listener:Listener::crystal",
+                    "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::crystal",
+                    "urn:pulumi:dev::aws::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-0",
+                    "urn:pulumi:dev::aws::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-1",
+                    "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$aws:ecs/cluster:Cluster::default-cluster",
+                    "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::default-cluster",
+                    "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:ecs/taskDefinition:TaskDefinition::crystal"
+                ],
+                "provider": "urn:pulumi:dev::aws::pulumi:providers:aws::default_2_13_1::2c1011eb-a995-4040-8c35-ce8241d5b0bd",
+                "propertyDependencies": {
+                    "cluster": [
+                        "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$aws:ecs/cluster:Cluster::default-cluster"
+                    ],
+                    "desiredCount": null,
+                    "launchType": null,
+                    "loadBalancers": [
+                        "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$aws:lb/listener:Listener::crystal",
+                        "urn:pulumi:dev::aws::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::crystal"
+                    ],
+                    "networkConfiguration": [
+                        "urn:pulumi:dev::aws::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-0",
+                        "urn:pulumi:dev::aws::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-1",
+                        "urn:pulumi:dev::aws::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::default-cluster"
+                    ],
+                    "taskDefinition": [
+                        "urn:pulumi:dev::aws::awsx:x:ecs:FargateTaskDefinition$aws:ecs/taskDefinition:TaskDefinition::crystal"
+                    ],
+                    "waitForSteadyState": null
+                }
+            }
+        ]
+    }
+}
