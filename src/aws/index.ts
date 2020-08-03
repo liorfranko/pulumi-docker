@@ -1,6 +1,4 @@
 import * as awsx from "@pulumi/awsx";
-import * as docker from "@pulumi/docker";
-import * as aws from "@pulumi/aws";
 
 let forntend_port = 80
 let backend_port = 80
