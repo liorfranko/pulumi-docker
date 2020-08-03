@@ -1,3 +1,0 @@
-config:
-  gcp:project: lp-vpn-network
-  gcp:zone: us-east4-c
