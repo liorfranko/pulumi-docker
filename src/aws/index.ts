@@ -1,7 +1,18 @@
 import * as awsx from "@pulumi/awsx";
 
-// Create a load balancer on port 80 and spin up two instances of Nginx.
-const lb = new awsx.lb.ApplicationListener("crystal", { port: 80 });
+// Create a load balancer on port 80, change the health path and deregistrationDelay
+const lb = new awsx.lb.ApplicationListener("crystal", { 
+    port: 80,
+    targetGroup: {
+        port: 80,
+        deregistrationDelay: 0, // Much faster for Dev tests
+        healthCheck: {
+            path: "/health"
+        }
+    }
+});
+
+// Spin up two instances of Customer crystal docker.
 const crystal = new awsx.ecs.FargateService("crystal", {
     taskDefinitionArgs: {
         containers: {
@@ -16,5 +27,5 @@ const crystal = new awsx.ecs.FargateService("crystal", {
     desiredCount: 2,
 });
 
-// Export the load balancer's address so that it's easy to access.
+// Export the load balancer's address.
 export const url = lb.endpoint.hostname;
