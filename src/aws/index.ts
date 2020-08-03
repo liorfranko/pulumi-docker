@@ -1,7 +1,7 @@
 import * as awsx from "@pulumi/awsx";
 
-let forntend_port = 80
-let backend_port = 80
+const forntend_port = 80
+const backend_port = 80
 
 const repo = new awsx.ecr.Repository("crystal");
 const image = repo.buildAndPushImage({
