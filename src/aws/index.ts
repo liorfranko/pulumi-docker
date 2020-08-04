@@ -2,17 +2,19 @@ import * as awsx from "@pulumi/awsx";
 
 const forntend_port = 80
 const backend_port = 80
+const listen_addr = "0.0.0.0"
 
-const repo = new awsx.ecr.Repository("crystal");
+const repo = new awsx.ecr.Repository("crystal-repo");
 const image = repo.buildAndPushImage({
     context: "./crystal-docker",
     cacheFrom: true,
-    // env: {"LISTEN_ADDR" : "0.0.0.0", "LISTEN_PORT": backend_port.toString()}
+    args: {"LISTEN_ADDR" : listen_addr, "LISTEN_PORT": backend_port.toString()}
 });
 
 
-// Create a load balancer on port 80, change the health path and deregistrationDelay
-const lb = new awsx.lb.ApplicationListener("crystal", { 
+// Create a load balancer listening on "forntend_port"
+// Change the health path and deregistrationDelay and target port
+const lb = new awsx.lb.ApplicationListener("crystal-alb", { 
     port: forntend_port,
     targetGroup: {
         port: backend_port,
@@ -24,12 +26,11 @@ const lb = new awsx.lb.ApplicationListener("crystal", {
 });
 
 // Spin up two instances of crystal docker.
-const crystal = new awsx.ecs.FargateService("crystal", {
+const crystal = new awsx.ecs.FargateService("crystal-fargate", {
     taskDefinitionArgs: {
         containers: {
             crystal: {
                 image: image,
-                // image: "docker.io/liorf1/crystal_docker",
                 memory: 1024,
                 portMappings: [ lb ],
                 cpu: 4096,

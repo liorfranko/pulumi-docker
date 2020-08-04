@@ -1,5 +1,8 @@
 FROM crystallang/crystal
-ENV LISTEN_ADDR="0.0.0.0"
-ENV LISTEN_PORT=80
+# TODO remove LISTEN_ADDR and LISTEN_PORT, and move them to index.ts
+ARG LISTEN_ADDR
+ARG LISTEN_PORT
+ENV LISTEN_ADDR=$LISTEN_ADDR
+ENV LISTEN_PORT=$LISTEN_PORT
 COPY ./src /usr/local/src/
 CMD crystal /usr/local/src/home.cr

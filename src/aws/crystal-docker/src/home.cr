@@ -37,7 +37,7 @@ begin
     end
 
     address = server.bind_tcp ENV["LISTEN_ADDR"].to_s, ENV["LISTEN_PORT"].to_i
-    puts "Listening on http://#{ENV["LISTEN_ADDR"].to_s}"
+    puts "Listening on http://#{ENV["LISTEN_ADDR"].to_s}:#{ENV["LISTEN_PORT"].to_s}"
     server.listen
 rescue ex
     puts "Error: #{ex.message}"
