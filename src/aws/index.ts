@@ -15,9 +15,9 @@ const image = repo.buildAndPushImage({
 // Create a load balancer listening on "forntend_port"
 // Change the health path and deregistrationDelay and target port
 const lb = new awsx.lb.ApplicationListener("crystal-alb", { 
-    port: forntend_port,
+    port: 80,
     targetGroup: {
-        port: backend_port,
+        port: 80,
         deregistrationDelay: 0, // Much faster for Dev tests
         healthCheck: {
             path: "/health"
