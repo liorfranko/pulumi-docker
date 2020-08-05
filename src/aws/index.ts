@@ -1,5 +1,5 @@
 import * as awsx from "@pulumi/awsx";
-
+// TODO rebuild from scratch using @pulumi/aws and use the forntend_port/backend_port/listen_addr as variables on the LB and SG objects
 const forntend_port = 80
 const backend_port = 80
 const listen_addr = "0.0.0.0"
