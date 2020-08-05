@@ -1,8 +1,19 @@
 # shellcheck disable=SC2128
 CODE_LOCATION=$(echo "$BASH_SOURCE" | awk -F 'pulumi-docker' '{print $1 }')
-AWS_ACCESS_KEY_ID=$(cat /Users/$USER/.aws/private-aws-access-key-new)
-AWS_SECRET_ACCESS_KEY=$(cat /Users/$USER/.aws/private-aws-secret-new)
-PULUMI_ACCESS_TOKEN=$(cat /Users/$USER/.pulumi-creds)
+if [ -z "$AWS_ACCESS_KEY_ID" ]
+then
+      AWS_ACCESS_KEY_ID=$(cat /Users/$USER/.aws/private-aws-access-key-new)
+fi
+
+if [ -z "$AWS_SECRET_ACCESS_KEY" ]
+then
+      AWS_SECRET_ACCESS_KEY=$(cat /Users/$USER/.aws/private-aws-secret-new)
+fi
+
+if [ -z "$PULUMI_ACCESS_TOKEN" ]
+then
+      PULUMI_ACCESS_TOKEN=$(cat /Users/$USER/.pulumi-creds)
+fi
 
 docker build \
 --build-arg PULUMI_ACCESS_TOKEN="$PULUMI_ACCESS_TOKEN" \
