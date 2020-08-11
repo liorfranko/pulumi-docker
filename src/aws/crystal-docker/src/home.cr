@@ -25,7 +25,11 @@ begin
           json.object do
             json.field "method", "#{context.request.method}"
             json.field "path", "#{context.request.path}"
-            json.field "body", "#{context.request.body}"
+            if context.request.body.nil?
+              json.field "body", "#{context.request.body}"
+            else
+              json.field "body", "#{context.request.body.as(IO).gets_to_end}"
+            end
             json.field "query", "#{context.request.query}"
             json.field "query_params", "#{context.request.query_params}"
             json.field "headers", context.request.headers
