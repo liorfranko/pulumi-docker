@@ -25,9 +25,7 @@ begin
           json.object do
             json.field "method", "#{context.request.method}"
             json.field "path", "#{context.request.path}"
-            if context.request.body.nil?
-              json.field "body", "#{context.request.body}"
-            else
+            if context.request.body.is_a?(IO)
               json.field "body", "#{context.request.body.as(IO).gets_to_end}"
             end
             json.field "query", "#{context.request.query}"
